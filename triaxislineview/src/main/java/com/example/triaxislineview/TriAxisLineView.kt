@@ -9,7 +9,7 @@ import android.content.Context
 import android.app.Activity
 
 val lines : Int = 3
-val parts : Int = lines + 2
+val parts : Int = lines + 3
 val lSizeFactor : Float = 3f
 val strokeFactor : Float = 90f
 val axisLineFactor : Float = 5.8f
@@ -45,7 +45,7 @@ fun Canvas.drawTriAxisLine(scale : Float, w : Float, h : Float , paint : Paint) 
     translate(w / 2, h / 2)
     for (j in 0..1) {
         save()
-        rotate(-90f * sf2)
+        rotate(-90f * sf2 * j)
         drawLine(0f, 0f, size * sf1, 0f, paint)
         restore()
     }
@@ -56,8 +56,10 @@ fun Canvas.drawTriAxisLine(scale : Float, w : Float, h : Float , paint : Paint) 
         val sj : Float = 1f - 2 * si
         val sfj : Float = sf.divideScale(2 + j, parts)
         save()
-        translate(lGap * j, -yOffset)
-        drawLine(0f, 0f, lGap * sfj, -lSize * sfj * sj, paint)
+        translate(lGap * j, -yOffset - lSize * si)
+        if (sfj >= 0.1f) {
+            drawLine(0f, 0f, lGap * sfj, -lSize * sfj * sj, paint)
+        }
         restore()
     }
     restore()
