@@ -224,4 +224,13 @@ class TriAxisLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : TriAxisLineView {
+            val view : TriAxisLineView = TriAxisLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
